@@ -6,12 +6,12 @@ import { dbInit } from '$lib/server/postgres/plugins/dbinit'
 import { Prefecture } from '$lib/server/postgres/models/Prefecture'
 import type { PrefectureType } from '$lib/server/postgres/models/Prefecture'
 
-// Model Sync
-await Prefecture.sync()
-
 export const getAllPrefecture = async () => {
   try {
     await dbInit ()
+    // Model Sync
+    await Prefecture.sync() //{ force: true }
+
     return await Prefecture.findAll()
   } catch (err) {
     console.error (err)
@@ -21,6 +21,9 @@ export const getAllPrefecture = async () => {
 export const createPrefecture = async (pref: PrefectureType) => {
   try {
     await dbInit ()
+    // Model Sync
+    await Prefecture.sync() //{ force: true }
+
     return await Prefecture.create({
       name: pref.name,
       prefCapital: pref.prefCapital
