@@ -2,6 +2,9 @@
 	import type { PageData } from './$types'
   export let data: PageData
   //console.log(users.every(user => user instanceof User)); // true
+
+  import pencilIcon from '$lib/assets/icons/'
+  import trashIcon from '$lib/assets/icons/'
 </script>
 
 <section>
@@ -25,6 +28,7 @@
         <th>uuid</th>
         <th>県名</th>
         <th>県庁所在地</th>
+        <th colspan="2">操作</th>
       </tr>
     </thead>
     <tbody>
@@ -33,6 +37,8 @@
           <td>{row.uuid}</td>
           <td>{row.name}</td>
           <td>{row.prefCapital}</td>
+          <td><img src={pencilIcon} alt="edit" /></td>
+          <td><img src={trashIcon} alt="delete" /></td>
         </tr>
       {/each}
     </tbody>
