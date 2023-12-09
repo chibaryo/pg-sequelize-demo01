@@ -3,11 +3,13 @@ import { dbConfig } from '$lib/server/postgres/plugins/dbinit'
 
 class Prefecture extends Model {}
 
-export interface PrefectureType {
-//  id: number
+export interface PrefectureDoc {
+  uuid: string
   name: string
   prefCapital: string
 }
+
+export type PrefectureType = Pick<PrefectureDoc, "name" | "prefCapital">
 
 Prefecture.init({
   uuid: {

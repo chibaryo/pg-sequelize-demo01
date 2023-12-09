@@ -18,6 +18,22 @@ export const getAllPrefecture = async () => {
   }
 }
 
+export const getPrefectureByUuid = async (uuid: string) => {
+  try {
+    await dbInit ()
+    // Model Sync
+    await Prefecture.sync() //{ force: true }
+
+    return await Prefecture.findAll({
+      where: {
+        uuid: uuid
+      }
+    })
+  } catch (err) {
+    console.error (err)
+  }
+}
+
 export const createPrefecture = async (pref: PrefectureType) => {
   try {
     await dbInit ()
@@ -29,6 +45,22 @@ export const createPrefecture = async (pref: PrefectureType) => {
       prefCapital: pref.prefCapital
     })
 
+  } catch (err) {
+    console.error (err)
+  }
+}
+
+export const deletePrefectureByUuid = async (uuid: string) => {
+  try {
+    await dbInit ()
+    // Model Sync
+    await Prefecture.sync() //{ force: true }
+
+    return await Prefecture.destroy({
+      where: {
+        uuid: uuid
+      }
+    })
   } catch (err) {
     console.error (err)
   }
