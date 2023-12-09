@@ -3,11 +3,19 @@ import { dbConfig } from '$lib/server/postgres/plugins/dbinit'
 
 class Prefecture extends Model {}
 
+export interface PrefectureType {
+//  id: number
+  name: string
+  prefCapital: string
+}
+
 Prefecture.init({
-  id: {
-    type: DataTypes.INTEGER,
+  uuid: {
+    type: DataTypes.UUID,
     primaryKey: true,
-    autoIncrement: true
+    defaultValue: DataTypes.UUIDV4,
+//    autoIncrement: true,
+    allowNull: false
   },
   name: {
     type: DataTypes.STRING,
