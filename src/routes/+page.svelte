@@ -47,7 +47,7 @@
     const deldata = await resp.json()
     console.log("data: ", deldata)
     $prefsStore = $prefsStore.filter((r) => {
-      return r.uuid !== deldata.uuid
+      return r.uuid !== currentRow.uuid
     })
 
     isDeleteModalOpen = false
@@ -113,11 +113,13 @@
             <div class="p-4 md:p-5">
                 <form class="space-y-4" method="POST" action="?/addpref">
                     <div>
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">県名</label>
+                        <label for="prefName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">県名</label>
                         {#if currentRow}
                         <input
                           type="text"
                           name="name"
+                          id="prefName"
+                          autocomplete="address-level1"
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                           placeholder="○○県"
                           value={currentRow.name}
@@ -126,17 +128,21 @@
                         <input
                           type="text"
                           name="name"
+                          id="prefName"
+                          autocomplete="address-level1"
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                           placeholder="○○県"
                           required>
                         {/if}
                     </div>
                     <div>
-                        <label for="prefCapital" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">県庁所在地</label>
+                        <label for="prefcapital" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">県庁所在地</label>
                         {#if currentRow}
                         <input
                           type="text"
                           name="prefCapital"
+                          id="prefcapital"
+                          autocomplete="address-level2"
                           placeholder="△△市"
                           value={currentRow.prefCapital}
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -145,6 +151,8 @@
                         <input
                           type="text"
                           name="prefCapital"
+                          id="prefcapital"
+                          autocomplete="address-level2"
                           placeholder="△△市"
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                           required>
