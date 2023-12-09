@@ -113,6 +113,9 @@
             <div class="p-4 md:p-5">
                 <form class="space-y-4" method="POST" action="?/addpref">
                     <div>
+                      {#if currentRow}
+                        <input type="hidden" name="uuid" bind:value={currentRow.uuid} />
+                      {/if}
                         <label for="prefName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">県名</label>
                         {#if currentRow}
                         <input

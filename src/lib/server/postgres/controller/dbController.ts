@@ -50,6 +50,25 @@ export const createPrefecture = async (pref: PrefectureType) => {
   }
 }
 
+export const updatePrefectureByUuid = async (uuid: string, pref: PrefectureType) => {
+  try {
+    await dbInit ()
+    // Model Sync
+    await Prefecture.sync() //{ force: true }
+
+    return await Prefecture.update({
+      name: pref.name,
+      prefCapital: pref.prefCapital
+    }, {
+      where: {
+        uuid: uuid
+      }
+    })
+  } catch (err) {
+    console.error (err)
+  }
+}
+
 export const deletePrefectureByUuid = async (uuid: string) => {
   try {
     await dbInit ()

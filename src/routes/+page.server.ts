@@ -2,8 +2,6 @@ import type { PageServerLoad, Actions } from './$types'
 
 // https://sequelize.org/docs/v6/core-concepts/model-basics/
 import { Sequelize, DataTypes, Model } from 'sequelize'
-import { dbConfig } from '$lib/server/postgres/plugins/dbinit'
-import { dbInit } from '$lib/server/postgres/plugins/dbinit'
 import * as dbController from '$lib/server/postgres/controller/dbController'
 
 export const load = (async ({ params }) => {
@@ -18,13 +16,21 @@ export const load = (async ({ params }) => {
 export const actions = {
   addpref: async ({ request }) => {
     const data = await request.formData()
+    const uuid = data.get('uuid')?.toString() ?? ''
     const name = data.get('name')?.toString() ?? ''
     const prefCapital = data.get('prefCapital')?.toString() ?? ''
 
-    const resp = await dbController.createPrefecture({
-      name: name,
-      prefCapital: prefCapital
-    })
+    if (uuid) {
+      const resp = await dbController.updatePrefectureByUuid(uuid, {
+        name: name,
+        prefCapital: prefCapital
+      })
+    } else {
+      const resp = await dbController.createPrefecture({
+        name: name,
+        prefCapital: prefCapital
+      })
+    }
 
     return { added: JSON.stringify({}) }
   }
